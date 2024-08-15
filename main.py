@@ -1,9 +1,14 @@
-from pyrogram import Client
-from pyrogram.raw.functions.messages import StartBot
-from pyrogram.raw.functions.messages import RequestWebView
+import httpx
+import os
+import random
+import threading
+import time
 from loguru import logger
+from pyrogram import Client
+from pyrogram.raw.functions.messages import RequestWebView
+from pyrogram.raw.functions.messages import StartBot
+
 from urllib.parse import unquote
-import httpx, time, os, threading, random
 
 API_ID = 12735088
 API_HASH = '367fbd3d9ce186f160eca00c8a1aa3b8'
@@ -15,12 +20,13 @@ SLEEP_NO_ENOUGHT_TAPS = 3600
 if not os.path.exists('sessions'):
     os.mkdir('sessions')
 
+
 class SimpleTap():
 
     def __init__(self, user_id: int, initData: str):
         self.user_id = user_id
         self.initData = initData
-        
+
     def profile(self):
         with httpx.Client() as session:
             try:
@@ -31,12 +37,12 @@ class SimpleTap():
                         "authData": self.initData
                     },
                     headers={
-                        'Accept': 'application/json, text/plain, */*', 
-                        'Accept-Encoding': 'gzip, deflate, br, zstd', 
-                        'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7', 
-                        'Content-Type': 'application/json', 
-                        'Origin': 'https://simpletap.app', 
-                        'Referer': 'https://simpletap.app/', 
+                        'Accept': 'application/json, text/plain, */*',
+                        'Accept-Encoding': 'gzip, deflate, br, zstd',
+                        'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
+                        'Content-Type': 'application/json',
+                        'Origin': 'https://simpletap.app',
+                        'Referer': 'https://simpletap.app/',
                         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36'
                     }
                 )
@@ -55,12 +61,12 @@ class SimpleTap():
                         "authData": self.initData
                     },
                     headers={
-                        'Accept': 'application/json, text/plain, */*', 
-                        'Accept-Encoding': 'gzip, deflate, br, zstd', 
-                        'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7', 
-                        'Content-Type': 'application/json', 
-                        'Origin': 'https://simpletap.app', 
-                        'Referer': 'https://simpletap.app/', 
+                        'Accept': 'application/json, text/plain, */*',
+                        'Accept-Encoding': 'gzip, deflate, br, zstd',
+                        'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
+                        'Content-Type': 'application/json',
+                        'Origin': 'https://simpletap.app',
+                        'Referer': 'https://simpletap.app/',
                         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36'
                     }
                 )
@@ -80,12 +86,12 @@ class SimpleTap():
                         "count": count
                     },
                     headers={
-                        'Accept': 'application/json, text/plain, */*', 
-                        'Accept-Encoding': 'gzip, deflate, br, zstd', 
-                        'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7', 
-                        'Content-Type': 'application/json', 
-                        'Origin': 'https://simpletap.app', 
-                        'Referer': 'https://simpletap.app/', 
+                        'Accept': 'application/json, text/plain, */*',
+                        'Accept-Encoding': 'gzip, deflate, br, zstd',
+                        'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
+                        'Content-Type': 'application/json',
+                        'Origin': 'https://simpletap.app',
+                        'Referer': 'https://simpletap.app/',
                         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36'
                     }
                 )
@@ -104,12 +110,12 @@ class SimpleTap():
                         "authData": self.initData
                     },
                     headers={
-                        'Accept': 'application/json, text/plain, */*', 
-                        'Accept-Encoding': 'gzip, deflate, br, zstd', 
-                        'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7', 
-                        'Content-Type': 'application/json', 
-                        'Origin': 'https://simpletap.app', 
-                        'Referer': 'https://simpletap.app/', 
+                        'Accept': 'application/json, text/plain, */*',
+                        'Accept-Encoding': 'gzip, deflate, br, zstd',
+                        'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
+                        'Content-Type': 'application/json',
+                        'Origin': 'https://simpletap.app',
+                        'Referer': 'https://simpletap.app/',
                         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36'
                     }
                 )
@@ -130,12 +136,12 @@ class SimpleTap():
                         "id": id
                     },
                     headers={
-                        'Accept': 'application/json, text/plain, */*', 
-                        'Accept-Encoding': 'gzip, deflate, br, zstd', 
-                        'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7', 
-                        'Content-Type': 'application/json', 
-                        'Origin': 'https://simpletap.app', 
-                        'Referer': 'https://simpletap.app/', 
+                        'Accept': 'application/json, text/plain, */*',
+                        'Accept-Encoding': 'gzip, deflate, br, zstd',
+                        'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
+                        'Content-Type': 'application/json',
+                        'Origin': 'https://simpletap.app',
+                        'Referer': 'https://simpletap.app/',
                         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36'
                     }
                 )
@@ -156,12 +162,12 @@ class SimpleTap():
                         "id": id
                     },
                     headers={
-                        'Accept': 'application/json, text/plain, */*', 
-                        'Accept-Encoding': 'gzip, deflate, br, zstd', 
-                        'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7', 
-                        'Content-Type': 'application/json', 
-                        'Origin': 'https://simpletap.app', 
-                        'Referer': 'https://simpletap.app/', 
+                        'Accept': 'application/json, text/plain, */*',
+                        'Accept-Encoding': 'gzip, deflate, br, zstd',
+                        'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
+                        'Content-Type': 'application/json',
+                        'Origin': 'https://simpletap.app',
+                        'Referer': 'https://simpletap.app/',
                         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36'
                     }
                 )
@@ -180,12 +186,12 @@ class SimpleTap():
                         "authData": self.initData
                     },
                     headers={
-                        'Accept': 'application/json, text/plain, */*', 
-                        'Accept-Encoding': 'gzip, deflate, br, zstd', 
-                        'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7', 
-                        'Content-Type': 'application/json', 
-                        'Origin': 'https://simpletap.app', 
-                        'Referer': 'https://simpletap.app/', 
+                        'Accept': 'application/json, text/plain, */*',
+                        'Accept-Encoding': 'gzip, deflate, br, zstd',
+                        'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
+                        'Content-Type': 'application/json',
+                        'Origin': 'https://simpletap.app',
+                        'Referer': 'https://simpletap.app/',
                         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36'
                     }
                 )
@@ -218,7 +224,8 @@ def thread(user_id, initData, i):
                     claim_status = api.claim()
                     if claim_status is not None:
                         if claim_status['result'] == 'OK':
-                            logger.success(f'Thread №{i} | Tokens claimed. +{profile_data["data"]["activeFarmingBalance"]}')
+                            logger.success(
+                                f'Thread №{i} | Tokens claimed. +{profile_data["data"]["activeFarmingBalance"]}')
 
                         else:
                             logger.error(f'Thread №{i} | Tokens not claimed.')
@@ -244,7 +251,8 @@ def thread(user_id, initData, i):
                             for tt2 in task_list['data']['social']:
                                 if tt2['id'] == task['id']:
                                     if tt2['status'] == 3:
-                                        logger.info(f'Thread №{i} | Completed task with id {tt2["id"]}. Bonus: +{tt2["bonus"]}')
+                                        logger.info(
+                                            f'Thread №{i} | Completed task with id {tt2["id"]}. Bonus: +{tt2["bonus"]}')
 
                         time.sleep(3)
 
@@ -324,7 +332,9 @@ while True:
                         ))
 
                         user_id = app.get_me().id
-                        initData = unquote(string=unquote(string=web_view.url.split('tgWebAppData=', maxsplit=1)[1].split('&tgWebAppVersion', maxsplit=1)[0]))
+                        initData = unquote(string=unquote(string=
+                                                          web_view.url.split('tgWebAppData=', maxsplit=1)[1].split(
+                                                              '&tgWebAppVersion', maxsplit=1)[0]))
 
                         threading.Thread(target=thread, args=(user_id, initData, i,)).start()
                     except:
