@@ -52,4 +52,4 @@ SLEEP_NOT_ENOUGH_TAPS - заддержка после расхода тапов 
 
 добавление сессии `python main.py --action 1`
 
-запуск бота python `python main.py --action 2`
+запуск бота `python main.py --action 2`
