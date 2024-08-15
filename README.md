@@ -1,25 +1,55 @@
 # SimpleTapBot
 
-Да пока что нормально про него не напишу, собирает монеты, кликает и выполняет задания.
+Собирает монеты, кликает и выполняет задания, крутит колесо, собирает награды за друзей.
 
 # Установить
 
-git clone https://github.com/AnimeHacking/SimpleTapBot.git
+git clone <репа>
 
 cd SimpleTapBot
 
-pip(3) install -r req.txt
+make env
+
+make session
+
+make run
+
+
+
+или так:
+
+git clone <репа>
+
+cd SimpleTapBot
+
+python3.10 -m venv .venv
+
+source .venv/bin/activate
+
+pip3 install --upgrade pip setuptools wheel
+
+pip3 install -r requirements.txt
+
+cp .env-example .env
+
 
 # Настройка
-все настройки временно через main.py
+все настройки - в файле .env
 
 API_ID, API_HASH - брать на https://my.telegram.org
 
-CLICKS_AMOUNT - количество монет за клик
+TAPS_AMOUNT - количество тапов, например [5, 8]
 
-SLEEP_AFTER_TAP - заддержка после тапа в секундах
+SLEEP_AFTER_TAP - заддержка после тапов в секундах
 
-SLEEP_NO_ENOUGHT_TAPS - заддержка после расхода тапов в секундах
+SLEEP_NOT_ENOUGH_TAPS - заддержка после расхода тапов в секундах, например [2000, 3600]
+
 
 # Запуск 
-python(3) main.py
+`python main.py`
+
+или
+
+добавление сессии `python main.py --action 1`
+
+запуск бота python `python main.py --action 2`
