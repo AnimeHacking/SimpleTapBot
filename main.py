@@ -221,7 +221,7 @@ def thread(user_id, initData, i, session):
             logger.info(f'{session} | Taps limit: <y>{profile_data["maxAvailableTaps"]:,}</y>. '
                         f'{profile_data["symbol"]} per hour: <y>{profile_data["activeFarmingPerSec"] * 3600:,}</y>')
 
-            if profile_data["spinCount"] > 0:
+            if settings.SPIN_THE_WHEEL and profile_data["spinCount"] > 0:
                 spins_count = profile_data["spinCount"]
                 logger.info(f'{session} | Available wheel spins: {spins_count}')
                 wheel_status = api.get_spin_wheel()
