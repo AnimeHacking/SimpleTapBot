@@ -228,6 +228,7 @@ def thread(user_id, initData, i, session):
                 if wheel_status is not None and wheel_status["result"] == 'OK':
                     for spin in range(spins_count):
                         spin_staus = api.claim_spin()
+                        time.sleep(2)
                         if spin_staus is not None and spin_staus["result"] == 'OK':
                             logger.success(f'{session} | Successfully span the wheel!')
                             profile_data = api.profile()["data"]
