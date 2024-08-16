@@ -237,7 +237,7 @@ def thread(user_id, initData, i, session):
                                         f'{profile_data["symbol"]} per hour: '
                                         f'<y>{profile_data["activeFarmingPerSec"] * 3600:,}</y>')
 
-            if profile_data["refBalance"] > 2000:
+            if settings.CLAIM_REFERRALS_REWARD and profile_data["refBalance"] > 2000:
                 friends_status = api.friends()
                 if friends_status is not None:
                     logger.info(f'{session} | Total friends: {friends_status["count"]:,}. '
