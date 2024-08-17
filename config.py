@@ -13,6 +13,7 @@ class Settings(BaseSettings):
 
     SPIN_THE_WHEEL: bool = True
     CLAIM_REFERRALS_REWARD: bool = True
-
+    CLAIM_COLLECTIONS_CARDS: bool = True
+    UPDATE_CARDS: bool = False
 
 settings = Settings()

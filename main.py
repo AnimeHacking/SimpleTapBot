@@ -209,6 +209,89 @@ class SimpleTap:
             except:
                 return None
 
+    def get_mining_blocks(self):
+        with httpx.Client() as session:
+            try:
+                r = session.post(
+                    url=AppURLS.GET_MINING_BLOCKS_URL,
+                    json={
+                        "userId": self.user_id,
+                        "authData": self.initData,
+                        "lang": "en"
+                    },
+                    headers=request_headers
+                )
+                return r.json()
+            except:
+                return None
+
+    def buy_mining_block(self, level, mineId):
+        with httpx.Client() as session:
+            try:
+                r = session.post(
+                    url=AppURLS.BUY_MINING_BLOCK_URL,
+                    json={
+                        "userId": self.user_id,
+                        "authData": self.initData,
+                        "level": level,
+                        "mineId": f"{mineId}"
+                    },
+                    headers=request_headers
+                )
+                return r.json()
+            except:
+                return None
+
+    def get_collections(self):
+        with httpx.Client() as session:
+            try:
+                r = session.post(
+                    url=AppURLS.GET_COLLECTIONS_URL,
+                    json={
+                        "userId": self.user_id,
+                        "authData": self.initData,
+                        "lang": "en"
+                    },
+                    headers=request_headers
+                )
+                return r.json()
+            except:
+                return None
+
+    def get_collection_cards(self, collection_id):
+        with httpx.Client() as session:
+            try:
+                r = session.post(
+                    url=AppURLS.GET_COLLECTION_CARDS_URL,
+                    json={
+                        "userId": self.user_id,
+                        "authData": self.initData,
+                        "collectionId": f"{collection_id}",
+                        "lang": "en"
+                    },
+                    headers=request_headers
+                )
+                return r.json()
+            except:
+                return None
+
+    def card_claim(self, card_id, collection_id):
+        with httpx.Client() as session:
+            try:
+                r = session.post(
+                    url=AppURLS.GET_COLLECTION_CARDS_URL,
+                    json={
+                        "userId": self.user_id,
+                        "authData": self.initData,
+                        "collectionId": f"{collection_id}",
+                        "cardId": card_id,
+                        "lang": "en"
+                    },
+                    headers=request_headers
+                )
+                return r.json()
+            except:
+                return None
 
 def thread(user_id, initData, i, session):
     logger.info(f'Process thread №{i} for session "{session}" started!')
@@ -254,6 +337,32 @@ def thread(user_id, initData, i, session):
                         logger.success(f'{session} | Successfully claimed referrals reward '
                                        f'<y>{profile_data["refBalance"]:,}</y> '
                                        f'{profile_data["symbol"]}')
+
+            if settings.CLAIM_COLLECTIONS_CARDS and profile_data['cardClaimCount'] > 0:
+                collections = api.get_collections()
+                if collections is not None and collections["result"] == 'OK':
+                    collections_list = collections["data"]
+                    unclaimed_collections = []
+                    for collection in collections_list:
+                        if collection["cards"]["cnt"] > 0:
+                            unclaimed_collections.append(collection["id"])
+                            logger.info(f'{session} | Unclaimed <g>{collection["cards"]["cnt"]}</g> '
+                                        f'cards in collection <g>{collection["title"]}</g>')
+                    for collection in unclaimed_collections:
+                        collection_cards = api.get_collection_cards(collection_id=collection)["data"]
+                        for card in collection_cards:
+                            if card["status"] == 1:
+                                claim_card = api.card_claim(card_id=card["id"], collection_id=collection)
+                                if claim_card["result"] == 'OK':
+                                    logger.success(f'{session} | Successfully claimed card '
+                                                   f'<g>{claim_card["data"]["title"]}</g>')
+
+            if settings.UPDATE_CARDS:
+                mining_blocks = api.get_mining_blocks()
+                if mining_blocks is not None and mining_blocks["result"] == 'OK':
+                    cards = mining_blocks["data"]["mines"]
+                    pass
+
 
             if profile_data['activeFarmingBalance'] == 0:
                 activate_status = api.activate()
