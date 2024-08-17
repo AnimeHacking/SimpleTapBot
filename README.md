@@ -10,36 +10,37 @@
 
 # 📕 Установка
 
-git clone <репа>
+`git clone <репа>`
 
-cd SimpleTapBot
+`cd SimpleTapBot`
 
-make env
+`make env`
 
-make session
+`make session`
 
-make run
+`make run`
 
 
 
 или так:
 
-git clone <репа>
+`git clone <репа>`
 
-cd SimpleTapBot
+`cd SimpleTapBot`
 
-python3.10 -m venv .venv
+`python3.10 -m venv .venv`
 
-source .venv/bin/activate
+`source .venv/bin/activate`
 
-pip3 install --upgrade pip setuptools wheel
+`pip3 install --upgrade pip setuptools wheel`
 
-pip3 install -r requirements.txt
+`pip3 install -r requirements.txt`
 
-cp .env-example .env
+`cp .env-example .env`
 
-nano .env
+`nano .env`
 
+Отредактировать и сохранить .env файл
 
 # ⚙ Настройки
 все настройки хранятся в файле .env
@@ -62,6 +63,10 @@ nano .env
 
 или
 
-добавление сессии `python main.py --action 1`
+добавление сессии:
 
-запуск бота `python main.py --action 2`
+`python main.py --action 1`
+
+запуск бота:
+
+`python main.py --action 2`
