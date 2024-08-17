@@ -116,3 +116,4 @@ class AppURLS:
     GET_COLLECTIONS_URL = f'{BASE_URL}telegram-collection/get-collections/'
     GET_COLLECTION_CARDS_URL = f'{BASE_URL}telegram-collection/get-collection-cards/'
     CARD_CLAIM_URL = f'{BASE_URL}telegram-collection/card-claim/'
+    CARD_DESCRIPTION_URL = f'{BASE_URL}telegram-collection/card-description/'

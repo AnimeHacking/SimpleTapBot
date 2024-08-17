@@ -279,11 +279,28 @@ class SimpleTap:
         with httpx.Client() as session:
             try:
                 r = session.post(
-                    url=AppURLS.GET_COLLECTION_CARDS_URL,
+                    url=AppURLS.CARD_CLAIM_URL,
                     json={
                         "userId": self.user_id,
                         "authData": self.initData,
                         "collectionId": f"{collection_id}",
+                        "cardId": card_id,
+                        "lang": "en"
+                    },
+                    headers=request_headers
+                )
+                return r.json()
+            except:
+                return None
+
+    def card_description(self, card_id):
+        with httpx.Client() as session:
+            try:
+                r = session.post(
+                    url=AppURLS.CARD_DESCRIPTION_URL,
+                    json={
+                        "userId": self.user_id,
+                        "authData": self.initData,
                         "cardId": card_id,
                         "lang": "en"
                     },
@@ -347,15 +364,17 @@ def thread(user_id, initData, i, session):
                         if collection["cards"]["cnt"] > 0:
                             unclaimed_collections.append(collection["id"])
                             logger.info(f'{session} | Unclaimed <g>{collection["cards"]["cnt"]}</g> '
-                                        f'cards in collection <g>{collection["title"]}</g>')
+                                        f'card(s) in collection <g>{collection["title"]}</g>')
                     for collection in unclaimed_collections:
                         collection_cards = api.get_collection_cards(collection_id=collection)["data"]
                         for card in collection_cards:
                             if card["status"] == 1:
                                 claim_card = api.card_claim(card_id=card["id"], collection_id=collection)
                                 if claim_card["result"] == 'OK':
+                                    card_descr = api.card_description(card_id=card["id"])
                                     logger.success(f'{session} | Successfully claimed card '
-                                                   f'<g>{claim_card["data"]["title"]}</g>')
+                                                   f'<g>{claim_card["data"]["title"]}</g> - '
+                                                   f'{card_descr["data"]}')
 
             if settings.UPGRADE_CARDS:
                 mining_blocks = api.get_mining_blocks()
