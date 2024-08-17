@@ -1,3 +1,5 @@
+[<img src="https://img.shields.io/badge/python-3.10%20%7C%203.11-blue">](https://www.python.org/downloads/)
+
 # SimpleTapBot
 
 Собирает монеты, кликает и выполняет задания, крутит колесо, собирает награды за друзей.
@@ -33,19 +35,23 @@ pip3 install -r requirements.txt
 cp .env-example .env
 
 
-# Настройка
+# ⚙ Настройки
 все настройки - в файле .env
 
-API_ID, API_HASH - брать на https://my.telegram.org
+| Настройка                   | Описание                                                                                 |
+|-----------------------------|------------------------------------------------------------------------------------------|
+| **API_ID / API_HASH**       | Данные платформы, с которой запускать сессию Telegram _брать на https://my.telegram.org_ |
+| **TAPS_AMOUNT**             | количество тапов, _например [5,8]_                                                       |
+| **SLEEP_AFTER_TAP**         | Задержка после серии тапов в секундах _например 2_                                       |
+| **SLEEP_NOT_ENOUGH_TAPS**   | Задержка после расхода тапов в секундах, _например [2000, 3600]_                         |
+| **SPIN_THE_WHEEL**          | Крутить колесо (True / False), по умолчанию _True_                                       |
+| **CLAIM_REFERRALS_REWARD**  | Собирать награды за рефералов (True / False), по умолчанию _True_                        |
+| **CLAIM_COLLECTIONS_CARDS** | Собирать карты из коллекций (True / False), по умолчанию _True_                          |
+| **UPGRADE_CARDS**           | Улучшать карты (True / False), _пока не работает)_                                       |
 
-TAPS_AMOUNT - количество тапов, например [5, 8]
-
-SLEEP_AFTER_TAP - заддержка после тапов в секундах
-
-SLEEP_NOT_ENOUGH_TAPS - заддержка после расхода тапов в секундах, например [2000, 3600]
 
 
-# Запуск 
+# ⚡ Запуск 
 `python main.py`
 
 или

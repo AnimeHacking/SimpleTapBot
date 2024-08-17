@@ -357,7 +357,7 @@ def thread(user_id, initData, i, session):
                                     logger.success(f'{session} | Successfully claimed card '
                                                    f'<g>{claim_card["data"]["title"]}</g>')
 
-            if settings.UPDATE_CARDS:
+            if settings.UPGRADE_CARDS:
                 mining_blocks = api.get_mining_blocks()
                 if mining_blocks is not None and mining_blocks["result"] == 'OK':
                     cards = mining_blocks["data"]["mines"]
