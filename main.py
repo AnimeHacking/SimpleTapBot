@@ -398,7 +398,7 @@ def thread(user_id, initData, i, session):
                     if claim_status is not None:
                         if claim_status['result'] == 'OK':
                             logger.success(
-                                f'{session} | Tokens claimed. +{profile_data["activeFarmingBalance"]}')
+                                f'{session} | Tokens claimed. <y>+{profile_data["activeFarmingBalance"]:,}</y>')
                         else:
                             logger.error(f'{session} | Tokens not claimed.')
                     else:
@@ -415,15 +415,16 @@ def thread(user_id, initData, i, session):
                             for tt1 in task_list['data']['social']:
                                 if tt1['id'] == task['id']:
                                     if tt1['status'] == 2:
-                                        logger.info(f'{session} | Started task with id {tt1["id"]}')
+                                        logger.info(f'{session} | Started task with id <g>{tt1["id"]}</g>')
 
                         t2 = api.check_task(type=task['type'], id=task['id'])
                         if t2 is not None:
                             for tt2 in task_list['data']['social']:
                                 if tt2['id'] == task['id']:
                                     if tt2['status'] == 3:
-                                        logger.info(
-                                            f'{session} | Completed task with id {tt2["id"]}. Bonus: +{tt2["bonus"]}')
+                                        logger.success(
+                                            f'{session} | Completed task with id <g>{tt2["id"]}</g>. '
+                                            f'Bonus: <y>+{tt2["bonus"]:,}</y>')
 
                         time.sleep(3)
 
@@ -448,7 +449,7 @@ def thread(user_id, initData, i, session):
                     settings.SLEEP_NOT_ENOUGH_TAPS[0],
                     settings.SLEEP_NOT_ENOUGH_TAPS[1],
                 )
-                logger.info(f'{session} | Not enough taps. Sleeping {sleep_time} seconds.')
+                logger.info(f'{session} | Not enough taps. Sleeping <y>{sleep_time:,}</y> seconds.')
                 time.sleep(sleep_time)
         else:
             logger.error(f'{session} | Profile get invalid response.')
