@@ -11,8 +11,8 @@ class Settings(BaseSettings):
     SLEEP_AFTER_TAP: int = 2
     SLEEP_NOT_ENOUGH_TAPS: list[int] = [2000, 3600]
 
-    SPIN_THE_WHEEL: bool = False
-    CLAIM_REFERRALS_REWARD: bool = False
+    SPIN_THE_WHEEL: bool = True
+    CLAIM_REFERRALS_REWARD: bool = True
 
 
 settings = Settings()

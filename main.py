@@ -195,7 +195,7 @@ class SimpleTap:
         with httpx.Client() as session:
             try:
                 r = session.post(
-                    url=AppURLS.GET_SPIN_WHEEL_URL,
+                    url=AppURLS.CLAIM_SPIN_URL,
                     json={
                         "userId": self.user_id,
                         "authData": self.initData,
@@ -218,24 +218,31 @@ def thread(user_id, initData, i, session):
         if profile_data is not None:
             profile_data = profile_data["data"]
             logger.info(f'{session} | Current balance: <y>{profile_data["balance"]:,}</y> {profile_data["symbol"]}')
-            logger.info(f'{session} | Taps limit: <y>{profile_data["maxAvailableTaps"]:,}</y>. '
-                        f'{profile_data["symbol"]} per hour: <y>{profile_data["activeFarmingPerSec"] * 3600:,}</y>')
+            # logger.info(f'{session} | Taps limit: <y>{profile_data["maxAvailableTaps"]:,}</y>. '
+            #             f'{profile_data["symbol"]} per hour: <y>{profile_data["activeFarmingPerSec"] * 3600:,}</y>')
 
             if settings.SPIN_THE_WHEEL and profile_data["spinCount"] > 0:
                 spins_count = profile_data["spinCount"]
                 logger.info(f'{session} | Available wheel spins: {spins_count}')
                 wheel_status = api.get_spin_wheel()
                 if wheel_status is not None and wheel_status["result"] == 'OK':
+                    spin_slices = wheel_status["data"]["slices"]
+                    spin_rewards = {}
+                    for slice in spin_slices:
+                        spin_types = ['Tap Limit', 'Per Hour', 'Tap Size', 'Coins']
+                        spin_rewards[slice["number"]] = f'+{slice["amount"]} {spin_types[slice["spinType"]]}'
                     for spin in range(spins_count):
                         spin_staus = api.claim_spin()
-                        time.sleep(2)
+                        time.sleep(1)
                         if spin_staus is not None and spin_staus["result"] == 'OK':
-                            logger.success(f'{session} | Successfully span the wheel!')
+                            logger.success(f'{session} | The wheel has been successfully spun! '
+                                           f'Reward: <y>{spin_rewards[spin_staus["data"]["number"]]}</y>')
                             profile_data = api.profile()["data"]
                             logger.info(f'{session} | Current balance: <y>{profile_data["balance"]:,}</y>. '
                                         f'Taps limit: <y>{profile_data["maxAvailableTaps"]:,}</y> '
                                         f'{profile_data["symbol"]} per hour: '
                                         f'<y>{profile_data["activeFarmingPerSec"] * 3600:,}</y>')
+                        time.sleep(2)
 
             if settings.CLAIM_REFERRALS_REWARD and profile_data["refBalance"] > 2000:
                 friends_status = api.friends()
@@ -244,7 +251,8 @@ def thread(user_id, initData, i, session):
                                 f'Reward: {profile_data["refBalance"]:,}')
                     claim_friends_status = api.claim_friends()
                     if claim_friends_status is not None and claim_friends_status["result"] == 'OK':
-                        logger.success(f'{session} | Successfully claimed <y>{profile_data["refBalance"]:,}</y> '
+                        logger.success(f'{session} | Successfully claimed referrals reward '
+                                       f'<y>{profile_data["refBalance"]:,}</y> '
                                        f'{profile_data["symbol"]}')
 
             if profile_data['activeFarmingBalance'] == 0:
