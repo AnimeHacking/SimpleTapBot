@@ -323,7 +323,7 @@ def thread(user_id, initData, i, session):
 
             if settings.SPIN_THE_WHEEL and profile_data["spinCount"] > 0:
                 spins_count = profile_data["spinCount"]
-                logger.info(f'{session} | Available wheel spins: {spins_count}')
+                logger.info(f'{session} | Available wheel spins: <y>{spins_count}</y>')
                 wheel_status = api.get_spin_wheel()
                 if wheel_status is not None and wheel_status["result"] == 'OK':
                     spin_slices = wheel_status["data"]["slices"]
