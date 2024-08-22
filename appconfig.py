@@ -84,12 +84,16 @@ user_agent = ("Mozilla/5.0 (Linux; Android 13; RMX3630 Build/TP1A.220905.001; wv
               "Mobile Safari/537.36")
 
 request_headers = {
-    'authority': 'api.simple.app',
+    'origin': 'https://simpletap.app',
+    'referer': 'https://simpletap.app/',
+    'pragma': 'no-cache',
+    'priority': 'u=1, i',
+    'cache-control': 'no-cache',
+    'content-type': 'application/json',
     'Accept': 'application/json, text/plain, */*',
     'Accept-Encoding': 'gzip, deflate, br, zstd',
     'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
     'x-requested-with': 'org.telegram.messenger',
-    'Content-Type': 'application/json',
     'Origin': 'https://simpletap.app',
     'Referer': 'https://simpletap.app/',
     'sec-ch-ua-mobile': '?1',
@@ -99,7 +103,7 @@ request_headers = {
 
 
 class AppURLS:
-    BASE_URL = 'https://api.simple.app/api/v1/public/'
+    BASE_URL = 'https://apii.simple.app/api/v1/public/'
     PROFILE_URL = f'{BASE_URL}telegram/profile/'
     ACTIVATE_URL = f'{BASE_URL}telegram/activate/'
     TAP_URL = f'{BASE_URL}telegram/tap/'
