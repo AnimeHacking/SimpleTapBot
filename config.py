@@ -7,8 +7,8 @@ class Settings(BaseSettings):
     API_ID: int
     API_HASH: str
 
-    TAPS_AMOUNT: list[int] = [5, 8]
-    SLEEP_AFTER_TAP: int = 2
+    TAPS_AMOUNT: list[int] = [10, 20]
+    SLEEP_AFTER_TAP: list[int] = [6, 10]
     SLEEP_NOT_ENOUGH_TAPS: list[int] = [2000, 3600]
 
     SPIN_THE_WHEEL: bool = True

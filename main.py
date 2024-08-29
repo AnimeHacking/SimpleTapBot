@@ -442,7 +442,11 @@ def thread(user_id, initData, i, session):
                     if tap_data['result'] == 'OK':
                         logger.success(f'{session} | Successfully tapped. '
                                        f'<y>+{taps * profile_data["tapSize"]:,}</y> {profile_data["symbol"]}')
-                        time.sleep(settings.SLEEP_AFTER_TAP)
+                        random_sleep = randint(
+                            settings.SLEEP_AFTER_TAP[0],
+                            settings.SLEEP_AFTER_TAP[1],
+                        )
+                        time.sleep(random_sleep)
 
             else:
                 sleep_time = randint(
