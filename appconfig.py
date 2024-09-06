@@ -103,7 +103,7 @@ request_headers = {
 
 
 class AppURLS:
-    BASE_URL = 'https://apii.simple.app/api/v1/public/'
+    BASE_URL = 'https://api.thesimpletap.app/api/v1/public/'
     PROFILE_URL = f'{BASE_URL}telegram/profile/'
     ACTIVATE_URL = f'{BASE_URL}telegram/activate/'
     TAP_URL = f'{BASE_URL}telegram/tap/'
