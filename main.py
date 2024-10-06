@@ -87,7 +87,9 @@ class SimpleTap:
                     url=AppURLS.GET_TASK_LIST_URL,
                     json={
                         "userId": self.user_id,
-                        "authData": self.initData
+                        "authData": self.initData,
+                        "lang": "en",
+                        "platform": 1,
                     },
                     headers=request_headers
                 )
